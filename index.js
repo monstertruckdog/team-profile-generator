@@ -1,8 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const chalk = require('chalk');
 const generateHtml = require('./src/generateHtml');
 const { listenerCount } = require('events');
+const employee = require('./lib/Employee')
+const Manager = require('./lib/Manager')
 
 const questionsTeamManager = [
     {
@@ -86,7 +87,13 @@ const getTeamManager = () => {
     inquirer
         .prompt(questionsTeamManager)
         .then((mgmtResponses) => {
-            return mgmtResponses
+            // teamManagerName
+            // teamManagerEmployeeId
+            // teamManagerEmail
+            // teamManagerOfficeNum
+            const createdManager = new Manager(mgmtResponses.teamManagerName, mgmtResponses.teamManagerEmployeeId, mgmtResponses.teamManagerEmail, mgmtResponses.teamManagerOfficeNum);
+            console.log(`MANAGER NAME:  ${createdManager.name}`);
+            // return mgmtResponses
         })
 }
 
@@ -122,3 +129,42 @@ const queryNextSelection = () => {
             }
         })
 }
+
+
+/*
+const createdEmployee = new Employee();
+console.logt(..)
+
+const name = createdEmployee.getName()
+*/
+
+/*
+  askToPlayAgain() {
+    inquirer
+      .prompt([
+        {
+          type: "confirm",
+          name: "choice",
+          message: "Play Again?"
+        }
+      ])
+      .then(val => {
+        // If the user says yes to another game, play again, otherwise quit the game
+        if (val.choice) {
+          this.play();
+        } else {
+          this.quit();
+        }
+      });
+  }
+
+  */
+
+  /*
+    quit() {
+    console.log("\nGoodbye!");
+    process.exit(0);
+  }
+*/
+
+getTeamManager();

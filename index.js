@@ -3,7 +3,11 @@ const fs = require('fs');
 const generateHtml = require('./src/generateHtml');
 const { listenerCount } = require('events');
 const employee = require('./lib/Employee')
-const Manager = require('./lib/Manager')
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern')
+const { ENGINE_METHOD_RAND } = require('constants');
+const { create } = require('domain');
 
 const questionsTeamManager = [
     {
@@ -64,22 +68,22 @@ const questionsTeamIntern = [
     {
         type: 'input',
         name: 'teamMemberInternName',
-        message: 'Enter the name of the team engineer'
+        message: 'Enter the name of the team Intern'
     },
     {
         type: 'input',
         name: 'teamMemberInternId',
-        message: 'Enter the employee ID of the engineer'
+        message: 'Enter the employee ID of the Intern'
     },
     {
         type: 'input',
         name: 'teamMemberInternEmail',
-        message: 'Enter the email address of the engineer'
+        message: 'Enter the email address of the Intern'
     },
     {
         type: 'input',
-        name: 'teamMemberInternGitHub',
-        message: 'Enter the GitHub username of the engineer'
+        name: 'teamMemberInternSchool',
+        message: 'Enter the name of the school where the Intern is enrolled'
     }
 ]
 
@@ -87,13 +91,14 @@ const getTeamManager = () => {
     inquirer
         .prompt(questionsTeamManager)
         .then((mgmtResponses) => {
-            // teamManagerName
-            // teamManagerEmployeeId
-            // teamManagerEmail
-            // teamManagerOfficeNum
             const createdManager = new Manager(mgmtResponses.teamManagerName, mgmtResponses.teamManagerEmployeeId, mgmtResponses.teamManagerEmail, mgmtResponses.teamManagerOfficeNum);
-            console.log(`MANAGER NAME:  ${createdManager.name}`);
-            // return mgmtResponses
+            console.log(`MANAGER NAME:  ${createdManager.getName(mgmtResponses)}`);
+            console.log(`MANAGER ID:  ${createdManager.getId(mgmtResponses)}`)
+            console.log(`MANAGER EMAIL:  ${createdManager.getEmail(mgmtResponses)}`)
+            console.log(`MANAGER OFFICE NUMBER:  ${createdManager.getOfficeNum(mgmtResponses)}`)
+            console.log(`MANAGER ROLE:  ${createdManager.getRole()}`)
+            // function to add createdManager data to HTML?
+            queryNextSelection();
         })
 }
 
@@ -101,7 +106,14 @@ const getNewTeamEngineer = () => {
     inquirer
         .prompt(questionsTeamEngineer)
         .then ((engResponses) => {
-            return engResponses
+            const createdTeamEngineer = new Engineer(engResponses.teamMemberEngineerName, engResponses.teamMemberEngineerId, engResponses.teamMemberEngineerEmail, engResponses.teamMemberEngineerGitHub)
+            console.log(`ENGINEER NAME:  ${createdTeamEngineer.getName(engResponses)}`)
+            console.log(`ENGINEER ID:  ${createdTeamEngineer.getId(engResponses)}`)
+            console.log(`ENGINEER EMAIL:  ${createdTeamEngineer.getEmail(engResponses)}`)
+            console.log(`ENGINEER GITHUB:  ${createdTeamEngineer.getGitHub(engResponses)}`)
+            console.log(`ENGINEER ROLE:  ${createdTeamEngineer.getRole()}`)
+            // function here?
+            queryNextSelection();
         })
 }
 
@@ -109,7 +121,13 @@ const getNewTeamIntern = () => {
     inquirer
         .prompt(questionsTeamIntern)
         .then((internResponses) => {
-            return internResponses
+            const createdTeamIntern = new Intern(internResponses.teamMemberInternName, internResponses.teamMemberInternId, internResponses.teamMemberInternEmail, internResponses.teamMemberInternSchool)
+            console.log(`INTERN NAME:  ${createdTeamIntern.getName(internResponses)}`)
+            console.log(`INTERN ID:  ${createdTeamIntern.getId(internResponses)}`)
+            console.log(`INTERN EMAIL:  ${createdTeamIntern.getEmail(internResponses)}`)
+            console.log(`INTERN SCHOOL NAME:  ${createdTeamIntern.getSchoolName(internResponses)}`)
+            console.log(`ENGINEER ROLE:  ${createdTeamIntern.getRole()}`)
+            queryNextSelection();
         })
 }
 
@@ -119,14 +137,17 @@ const queryNextSelection = () => {
         .then ((queryResponse) => {
             if (queryResponse.newMemberChoice === 'Add a new Team Engineer') {
                 getNewTeamEngineer();
-                queryNextSelection();
+                //queryNextSelection();
+                return;
             } else if (queryResponse.newMemberChoice === 'Add a new Team Intern') {
                 getNewTeamIntern();
-                queryNextSelection();
+                //queryNextSelection();
+                return;
             } else {
                 console.log(`THANK YOU FOR YOUR SUBMISSION\nYour Team Profile HTML has been successfully generated`);
                 // function here for writing HTML
             }
+            //queryNextSelection();
         })
 }
 
@@ -167,4 +188,10 @@ const name = createdEmployee.getName()
   }
 */
 
+function writeToFile(htmlContent) {
+    fs.appendFile('./dist/teamprofile.html', htmlContent, (err) =>
+      err ? console.error(err) : console.log('Congratulations!\nYour HTML file has been generated successfully\n\nThank you for using Professional README Generator'));
+}
+
+console.log(`Welcome to the Team Profile Generator\nPlease enter the team manager's information`)
 getTeamManager();

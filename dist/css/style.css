@@ -1,0 +1,41 @@
+/*
+* {
+    background-color: #E2F0FA;
+}
+*/
+
+body {
+    height: 100vh;
+    background-color: #E2F0FA;
+}
+
+.input-form {
+    width: 50%;
+    margin-top: 8px;
+}
+
+.card-storage {
+    margin: 2rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card-content {
+    padding: 0.5rem;
+}
+
+.card-head {
+    background-color: #E2F0FA;;
+}
+
+.employee-card {
+    flex: 1 300px;
+    max-width: max-content;
+    margin: 1rem;
+}
+
+.table-style-oth {
+    margin: 0.5rem;
+}

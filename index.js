@@ -98,6 +98,9 @@ const getTeamManager = () => {
             console.log(`MANAGER OFFICE NUMBER:  ${createdManager.getOfficeNum(mgmtResponses)}`)
             console.log(`MANAGER ROLE:  ${createdManager.getRole()}`)
             // function to add createdManager data to HTML?
+            generateHtml.generateHtmlHead()
+            const dataMgmt = generateHtml.generateHtmlManager(createdManager).trim();
+            writeToFile(dataMgmt)
             queryNextSelection();
         })
 }
@@ -193,5 +196,11 @@ function writeToFile(htmlContent) {
       err ? console.error(err) : console.log('Congratulations!\nYour HTML file has been generated successfully\n\nThank you for using Professional README Generator'));
 }
 
+//////////////////////////////
+
 console.log(`Welcome to the Team Profile Generator\nPlease enter the team manager's information`)
 getTeamManager();
+
+// TODO
+//     * Figure out how often to write or append HTML
+//     * Write Html SOMEWHERE

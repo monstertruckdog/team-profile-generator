@@ -30,11 +30,13 @@ body {
     background-color: #E2F0FA;;
 }
 
-
-
 .table-style-oth {
     margin: 0.5rem;
 }
+
+/*
+#mgr-card
+*/
 
 #employee-card {
     flex: 1 300px;

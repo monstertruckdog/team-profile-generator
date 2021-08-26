@@ -28,13 +28,13 @@ const generateHtmlHead = () => {
 }
 
 const generateHtmlManager = (createdManager) => {
-    console.log(`createdManager:  `, createdManager);
-    console.log(`mgmtResponses (MODIFIED):  `, createdManager.name)
+    console.log(`generateHtml --> createdManager:  `, createdManager);
+    console.log(`generateHtml --> createdManager.name:  `, createdManager.name)
     //body.append(`<section id="main-section"></section>`);
     // const mainSection = document.getElementById("main-section")
     // return mainSection.append(`
     return (`
-    <div class="container card-storage">
+    <div class="container card-storage" id="mgr-card">
         <div class="card" id="employee-card">
             <div class="card-content has-background-info">
                 <p class="title has-text-white">
@@ -43,7 +43,7 @@ const generateHtmlManager = (createdManager) => {
                 </p>
                 <p class="subtitle has-text-white">
                     <!--Member Job Here-->
-                    Manager
+                    ${createdManager.getRole()}
                 </p>
             </div>
             <div>
@@ -58,8 +58,82 @@ const generateHtmlManager = (createdManager) => {
                             <td>${createdManager.email}</td>
                         </tr>
                         <tr>
-                            <td><strong>OFFICE NUMBER / GITHUB / SCHOOL</strong></td>
+                            <td><strong>OFFICE NUMBER</strong></td>
                             <td>${createdManager.officeNum}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container card-storage">`)
+}
+
+const generateHtmlEngineer = (createdEngineer) => {
+    console.log(`generateHtml --> createdEngineer:  `, createdEngineer);
+    console.log(`generateHtml --> createdEngineer.name:  `, createdEngineer.name)
+    return (`
+        <div class="card" id="employee-card">
+            <div class="card-content has-background-info">
+                <p class="title has-text-white">
+                    <!--Member Name Here-->
+                    ${createdEngineer.name}
+                </p>
+                <p class="subtitle has-text-white">
+                    <!--Member Job Here-->
+                    ${createdEngineer.getRole()}
+                </p>
+            </div>
+            <div>
+                <table class="table is-bordered table-style-oth">
+                    <tbody>
+                        <tr>
+                            <td><strong>EMPLOYEE ID</strong></td>
+                            <td>${createdEngineer.id}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EMPLOYEE EMAIL</strong></td>
+                            <td>${createdEngineer.email}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GITHUB / SCHOOL</strong></td>
+                            <td><a href="https://github.com/${createdEngineer.gitHubName}" target="_blank" rel="nofollow external noreferrer noopener">${createdEngineer.gitHubName}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`)
+}
+
+const generateHtmlIntern = (createdIntern) => {
+    console.log(`generateHtml --> createdIntern:  `, createdIntern);
+    console.log(`generateHtml --> createdIntern.name:  `, createdIntern.name)
+    return (`
+        <div class="card" id="employee-card">
+            <div class="card-content has-background-info">
+                <p class="title has-text-white">
+                    <!--Member Name Here-->
+                    ${createdIntern.name}
+                </p>
+                <p class="subtitle has-text-white">
+                    <!--Member Job Here-->
+                    ${createdIntern.getRole()}
+                </p>
+            </div>
+            <div>
+                <table class="table is-bordered table-style-oth">
+                    <tbody>
+                        <tr>
+                            <td><strong>EMPLOYEE ID</strong></td>
+                            <td>${createdIntern.id}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EMPLOYEE EMAIL</strong></td>
+                            <td>${createdIntern.email}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SCHOOL</strong></td>
+                            <td>${createdIntern.schoolName}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -69,5 +143,7 @@ const generateHtmlManager = (createdManager) => {
 
 module.exports = {
     generateHtmlHead,
-    generateHtmlManager
+    generateHtmlManager,
+    generateHtmlEngineer,
+    generateHtmlIntern
 }

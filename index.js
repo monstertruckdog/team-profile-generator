@@ -118,7 +118,8 @@ const getNewTeamEngineer = () => {
             console.log(`ENGINEER EMAIL:  ${createdTeamEngineer.getEmail(engResponses)}`)
             console.log(`ENGINEER GITHUB:  ${createdTeamEngineer.getGitHub(engResponses)}`)
             console.log(`ENGINEER ROLE:  ${createdTeamEngineer.getRole()}`)
-            // function here?
+            const dataEng = generateHtml.generateHtmlEngineer(createdTeamEngineer).trim();
+            writeStream.write(dataEng);
             queryNextSelection();
         })
 }
@@ -133,6 +134,8 @@ const getNewTeamIntern = () => {
             console.log(`INTERN EMAIL:  ${createdTeamIntern.getEmail(internResponses)}`)
             console.log(`INTERN SCHOOL NAME:  ${createdTeamIntern.getSchoolName(internResponses)}`)
             console.log(`ENGINEER ROLE:  ${createdTeamIntern.getRole()}`)
+            const dataIntern = generateHtml.generateHtmlIntern(createdTeamIntern).trim();
+            writeStream.write(dataIntern);
             queryNextSelection();
         })
 }
@@ -143,59 +146,22 @@ const queryNextSelection = () => {
         .then ((queryResponse) => {
             if (queryResponse.newMemberChoice === 'Add a new Team Engineer') {
                 getNewTeamEngineer();
-                //queryNextSelection();
                 return;
             } else if (queryResponse.newMemberChoice === 'Add a new Team Intern') {
                 getNewTeamIntern();
-                //queryNextSelection();
                 return;
             } else if (queryResponse.newMemberChoice === 'Exit, no new Team Members to add') {
+                writeStream.write(`
+                    </div>
+                </body>
+            </html>`)
                 writeStream.end()
                 console.log(`THANK YOU FOR YOUR SUBMISSION\nYour Team Profile HTML has been successfully generated`);
             } else {
-                console.log(`THANK YOU FOR YOUR SUBMISSION\nYour Team Profile HTML has been successfully generated`);
-                // function here for writing HTML
+                console.log(`THANK YOU FOR YOUR SUBMISSION`);
             }
-            //queryNextSelection();
         })
 }
-
-
-/*
-const createdEmployee = new Employee();
-console.logt(..)
-
-const name = createdEmployee.getName()
-*/
-
-/*
-  askToPlayAgain() {
-    inquirer
-      .prompt([
-        {
-          type: "confirm",
-          name: "choice",
-          message: "Play Again?"
-        }
-      ])
-      .then(val => {
-        // If the user says yes to another game, play again, otherwise quit the game
-        if (val.choice) {
-          this.play();
-        } else {
-          this.quit();
-        }
-      });
-  }
-
-  */
-
-  /*
-    quit() {
-    console.log("\nGoodbye!");
-    process.exit(0);
-  }
-*/
 
 function writeToFile(htmlContent) {
     fs.appendFile('./dist/teamprofile.html', htmlContent, (err) =>
@@ -204,15 +170,9 @@ function writeToFile(htmlContent) {
 
 const writeStream = fs.createWriteStream('./dist/teamprofile.html');
 
-//////////////////////////////
+// --- START --- //
 
 console.log(`Welcome to the Team Profile Generator\nPlease enter the team manager's information`)
-// const writeHeading = async () => {
-//     writeToFile(generateHtml.generateHtmlHead());
-// }
+
 writeStream.write(generateHtml.generateHtmlHead())
 getTeamManager();
-
-// TODO
-//     * Figure out how often to write or append HTML
-//     * Write Html SOMEWHERE

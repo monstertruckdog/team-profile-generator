@@ -46,7 +46,7 @@ describe("Engineer", () => {
     });
   });
 
-  describe("Engineer's git hub", () => {
+  describe("Engineer's git hub name", () => {
     it("should not return an GitHub value since no GitHub value should be assigned to an employee`", () => {
       const result = new Engineer(person[0], person[1], person[2], person[3]);
       expect(result.gitHubName).toEqual(`billycobhamdrum`)

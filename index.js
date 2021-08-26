@@ -37,7 +37,7 @@ const questionsNewMember = [
         type: 'list',
         name: 'newMemberChoice',
         message: 'Select one of the following options',
-        choices: ['Add a new Team Engineer', 'Add a new Team Intern', 'Team Complete! No new Team Members to add']
+        choices: ['Add a new Team Engineer', 'Add a new Team Intern', 'Exit, no new Team Members to add']
     }
 ]
 
@@ -149,6 +149,9 @@ const queryNextSelection = () => {
                 getNewTeamIntern();
                 //queryNextSelection();
                 return;
+            } else if (queryResponse.newMemberChoice === 'Exit, no new Team Members to add') {
+                writeStream.end()
+                console.log(`THANK YOU FOR YOUR SUBMISSION\nYour Team Profile HTML has been successfully generated`);
             } else {
                 console.log(`THANK YOU FOR YOUR SUBMISSION\nYour Team Profile HTML has been successfully generated`);
                 // function here for writing HTML

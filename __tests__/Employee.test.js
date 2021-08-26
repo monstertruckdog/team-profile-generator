@@ -33,9 +33,30 @@ describe("Employee", () => {
   });
 
   describe("role", () => {
-    it("should not return an employee role that has not been overwritten", () => {
+    it("should not return an employee role value that has not been overwritten`", () => {
       const result = new Employee(person[0], person[1], person[2]);
       expect(result.getRole()).not.toEqual(`Manager`);
+    });
+  });
+
+  describe("employee office number", () => {
+    it("should not return an office number since no office number value should be assigned to an employee`", () => {
+      const result = new Employee(person[0], person[1], person[2]);
+      expect(result.officeNum).not.toBeDefined();
+    });
+  });
+
+  describe("employee git hub", () => {
+    it("should not return an GitHub value since no GitHub value should be assigned to an employee`", () => {
+      const result = new Employee(person[0], person[1], person[2]);
+      expect(result.gitHubUser).not.toBeDefined();
+    });
+  });
+
+  describe("employee school name", () => {
+    it("should not return a school or university name since no school or university name should be assigned to an employee`", () => {
+      const result = new Employee(person[0], person[1], person[2]);
+      expect(result.schoolName).not.toBeDefined();
     });
   });
 });

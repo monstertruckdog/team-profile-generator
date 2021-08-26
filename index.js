@@ -97,10 +97,13 @@ const getTeamManager = () => {
             console.log(`MANAGER EMAIL:  ${createdManager.getEmail(mgmtResponses)}`)
             console.log(`MANAGER OFFICE NUMBER:  ${createdManager.getOfficeNum(mgmtResponses)}`)
             console.log(`MANAGER ROLE:  ${createdManager.getRole()}`)
+            console.log(`createdManager:  `, createdManager);
             // function to add createdManager data to HTML?
-            generateHtml.generateHtmlHead()
+            // writeToFile(generateHtml.generateHtmlHead());
+            //console.log(`HTML CONTENTS AFTER generateHtmlHead:  `, generateHtml)
             const dataMgmt = generateHtml.generateHtmlManager(createdManager).trim();
-            writeToFile(dataMgmt)
+            // writeToFile(dataMgmt)
+            writeStream.write(dataMgmt);
             queryNextSelection();
         })
 }
@@ -196,9 +199,15 @@ function writeToFile(htmlContent) {
       err ? console.error(err) : console.log('Congratulations!\nYour HTML file has been generated successfully\n\nThank you for using Professional README Generator'));
 }
 
+const writeStream = fs.createWriteStream('./dist/teamprofile.html');
+
 //////////////////////////////
 
 console.log(`Welcome to the Team Profile Generator\nPlease enter the team manager's information`)
+// const writeHeading = async () => {
+//     writeToFile(generateHtml.generateHtmlHead());
+// }
+writeStream.write(generateHtml.generateHtmlHead())
 getTeamManager();
 
 // TODO

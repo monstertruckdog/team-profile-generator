@@ -30,12 +30,14 @@ body {
     background-color: #E2F0FA;;
 }
 
-.employee-card {
-    flex: 1 300px;
-    max-width: max-content;
-    margin: 1rem;
-}
+
 
 .table-style-oth {
     margin: 0.5rem;
+}
+
+#employee-card {
+    flex: 1 300px;
+    max-width: max-content;
+    margin: 1rem;
 }

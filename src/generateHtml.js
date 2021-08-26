@@ -1,8 +1,3 @@
-// onst headAndHeader = document.getElementsByClassName("header");
-// const mainSection = document.getElementById("main-section")
-//const mainBody = document.getElementById("main-body");
-// const mainBody = document.body;
-
 const generateHtmlHead = () => {
     return `
     <!DOCTYPE html>
@@ -28,11 +23,6 @@ const generateHtmlHead = () => {
 }
 
 const generateHtmlManager = (createdManager) => {
-    console.log(`generateHtml --> createdManager:  `, createdManager);
-    console.log(`generateHtml --> createdManager.name:  `, createdManager.name)
-    //body.append(`<section id="main-section"></section>`);
-    // const mainSection = document.getElementById("main-section")
-    // return mainSection.append(`
     return (`
     <div class="container card-storage" id="mgr-card">
         <div class="card" id="employee-card">
@@ -70,8 +60,6 @@ const generateHtmlManager = (createdManager) => {
 }
 
 const generateHtmlEngineer = (createdEngineer) => {
-    console.log(`generateHtml --> createdEngineer:  `, createdEngineer);
-    console.log(`generateHtml --> createdEngineer.name:  `, createdEngineer.name)
     return (`
         <div class="card" id="employee-card">
             <div class="card-content has-background-info">
@@ -106,8 +94,6 @@ const generateHtmlEngineer = (createdEngineer) => {
 }
 
 const generateHtmlIntern = (createdIntern) => {
-    console.log(`generateHtml --> createdIntern:  `, createdIntern);
-    console.log(`generateHtml --> createdIntern.name:  `, createdIntern.name)
     return (`
         <div class="card" id="employee-card">
             <div class="card-content has-background-info">

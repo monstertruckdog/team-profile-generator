@@ -92,17 +92,7 @@ const getTeamManager = () => {
         .prompt(questionsTeamManager)
         .then((mgmtResponses) => {
             const createdManager = new Manager(mgmtResponses.teamManagerName, mgmtResponses.teamManagerEmployeeId, mgmtResponses.teamManagerEmail, mgmtResponses.teamManagerOfficeNum);
-            console.log(`MANAGER NAME:  ${createdManager.getName(mgmtResponses)}`);
-            console.log(`MANAGER ID:  ${createdManager.getId(mgmtResponses)}`)
-            console.log(`MANAGER EMAIL:  ${createdManager.getEmail(mgmtResponses)}`)
-            console.log(`MANAGER OFFICE NUMBER:  ${createdManager.getOfficeNum(mgmtResponses)}`)
-            console.log(`MANAGER ROLE:  ${createdManager.getRole()}`)
-            console.log(`createdManager:  `, createdManager);
-            // function to add createdManager data to HTML?
-            // writeToFile(generateHtml.generateHtmlHead());
-            //console.log(`HTML CONTENTS AFTER generateHtmlHead:  `, generateHtml)
             const dataMgmt = generateHtml.generateHtmlManager(createdManager).trim();
-            // writeToFile(dataMgmt)
             writeStream.write(dataMgmt);
             queryNextSelection();
         })
@@ -113,11 +103,6 @@ const getNewTeamEngineer = () => {
         .prompt(questionsTeamEngineer)
         .then ((engResponses) => {
             const createdTeamEngineer = new Engineer(engResponses.teamMemberEngineerName, engResponses.teamMemberEngineerId, engResponses.teamMemberEngineerEmail, engResponses.teamMemberEngineerGitHub)
-            console.log(`ENGINEER NAME:  ${createdTeamEngineer.getName(engResponses)}`)
-            console.log(`ENGINEER ID:  ${createdTeamEngineer.getId(engResponses)}`)
-            console.log(`ENGINEER EMAIL:  ${createdTeamEngineer.getEmail(engResponses)}`)
-            console.log(`ENGINEER GITHUB:  ${createdTeamEngineer.getGitHub(engResponses)}`)
-            console.log(`ENGINEER ROLE:  ${createdTeamEngineer.getRole()}`)
             const dataEng = generateHtml.generateHtmlEngineer(createdTeamEngineer).trim();
             writeStream.write(dataEng);
             queryNextSelection();
@@ -129,11 +114,6 @@ const getNewTeamIntern = () => {
         .prompt(questionsTeamIntern)
         .then((internResponses) => {
             const createdTeamIntern = new Intern(internResponses.teamMemberInternName, internResponses.teamMemberInternId, internResponses.teamMemberInternEmail, internResponses.teamMemberInternSchool)
-            console.log(`INTERN NAME:  ${createdTeamIntern.getName(internResponses)}`)
-            console.log(`INTERN ID:  ${createdTeamIntern.getId(internResponses)}`)
-            console.log(`INTERN EMAIL:  ${createdTeamIntern.getEmail(internResponses)}`)
-            console.log(`INTERN SCHOOL NAME:  ${createdTeamIntern.getSchoolName(internResponses)}`)
-            console.log(`ENGINEER ROLE:  ${createdTeamIntern.getRole()}`)
             const dataIntern = generateHtml.generateHtmlIntern(createdTeamIntern).trim();
             writeStream.write(dataIntern);
             queryNextSelection();
@@ -161,11 +141,6 @@ const queryNextSelection = () => {
                 console.log(`THANK YOU FOR YOUR SUBMISSION`);
             }
         })
-}
-
-function writeToFile(htmlContent) {
-    fs.appendFile('./dist/teamprofile.html', htmlContent, (err) =>
-      err ? console.error(err) : console.log('Congratulations!\nYour HTML file has been generated successfully\n\nThank you for using Professional README Generator'));
 }
 
 const writeStream = fs.createWriteStream('./dist/teamprofile.html');
